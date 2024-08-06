@@ -2,14 +2,11 @@ package mongo_driver
 
 import (
 	"context"
-	"crypto/tls"
-	"crypto/x509"
 	"fmt"
 	"github.com/Food-fusion-Fiap/order-service/src/infra/db/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"io/ioutil"
 	"log"
 	"os"
 	"time"
