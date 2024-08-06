@@ -25,29 +25,12 @@ func ConnectDB() {
 	locale, err := time.LoadLocation("America/Sao_Paulo")
 	LocaleApp = locale
 
-	// Load the AWS DocumentDB root CA
-	caCert, err := ioutil.ReadFile("/infra/cert/global-bundle.pem")
-	if err != nil {
-		log.Fatalf("Failed to read root certificate: %v", err)
-	}
-
-	// Create a new TLS config using the root CA
-	roots := x509.NewCertPool()
-	if ok := roots.AppendCertsFromPEM(caCert); !ok {
-		log.Fatalf("Failed to append CA certificate")
-	}
-
-	tlsConfig := &tls.Config{
-		InsecureSkipVerify: false,
-		RootCAs:            roots,
-	}
-
-	uri := fmt.Sprintf("mongodb://%s:%s@%s:27017",
+	uri := fmt.Sprintf("mongodb://%s:%s@%s:27017/?tls=false",
 		os.Getenv("MONGO_INITDB_ROOT_USERNAME"), os.Getenv("MONGO_INITDB_ROOT_PASSWORD"), os.Getenv("MONGO_INITDB_HOST"))
 
 	fmt.Println(uri)
 
-	clientOptions := options.Client().ApplyURI(uri).SetTLSConfig(tlsConfig)
+	clientOptions := options.Client().ApplyURI(uri)
 
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
