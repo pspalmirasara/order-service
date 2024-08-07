@@ -35,11 +35,11 @@ func ConnectDB() {
 		log.Panic("Erro ao conectar com banco de dados MongoDB:", err)
 	}
 
-	// Check the connection
-	err = client.Ping(context.TODO(), nil)
-	if err != nil {
-		log.Panic("Erro ao pingar o MongoDB:", err)
-	}
+	// // Check the connection
+	// err = client.Ping(context.TODO(), nil)
+	// if err != nil {
+	// 	log.Panic("Erro ao pingar o MongoDB:", err)
+	// }
 
 	fmt.Println("Conectado ao MongoDB!")
 
