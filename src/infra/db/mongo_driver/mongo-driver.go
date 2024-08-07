@@ -22,7 +22,7 @@ func ConnectDB() {
 	locale, err := time.LoadLocation("America/Sao_Paulo")
 	LocaleApp = locale
 
-	uri := fmt.Sprintf("mongodb://%s:%s@%s:27017/?tls=false&retryWrites=false",
+	uri := fmt.Sprintf("mongodb://%s:%s@%s:27017/?tls=false",
 		os.Getenv("MONGO_INITDB_ROOT_USERNAME"), os.Getenv("MONGO_INITDB_ROOT_PASSWORD"), os.Getenv("MONGO_INITDB_HOST"))
 
 	fmt.Println(uri)
@@ -38,7 +38,7 @@ func ConnectDB() {
 	// Check the connection
 	err = client.Ping(context.TODO(), nil)
 	if err != nil {
-		log.Panic("Erro ao conectar com banco de dados MongoDB:", err)
+		log.Panic("Erro ao pingar o MongoDB:", err)
 	}
 
 	fmt.Println("Conectado ao MongoDB!")
